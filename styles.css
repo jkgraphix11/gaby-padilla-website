@@ -288,15 +288,15 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 @media(min-width:821px){.video-grid{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1100px}}
 @media(max-width:820px){.video-grid .video-card:last-child:nth-child(odd){grid-column:1/-1;width:calc((100% - 12px)/2);justify-self:center}}
 
-/* Keep long package titles inside mobile cards, including Quinceañeras. */
+/* Smaller package headings on mobile, with safe wrapping for enlarged text. */
 @media (max-width:600px) {
-  .feature-copy { container-type:inline-size; }
   .feature-copy h3 {
-    font-size:clamp(1.75rem,9vw,3.5rem);
-    font-size:clamp(1.75rem,13cqi,3.5rem);
-    line-height:1.1;
+    font-size:38px;
+    line-height:1.15;
     white-space:normal;
     overflow-wrap:anywhere;
   }
 }
-
+@media (max-width:380px) {
+  .feature-copy h3 { font-size:32px; }
+}
