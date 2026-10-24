@@ -232,3 +232,21 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 @media(max-width:600px){.bridal-look img,.bridal-look-wide img{aspect-ratio:var(--photo-ratio,3 / 4)}}
 
 .lang-switch{display:inline-flex;align-items:center;justify-content:center;gap:8px}.language-globe{display:block;width:20px;height:20px;flex:none}
+
+/* Natural-height masonry: Safari must measure the complete image stack. */
+.portfolio-grid,.bridal-look-grid{display:block;columns:3;column-gap:20px;grid-template-columns:none;grid-auto-rows:auto}
+.portfolio-photo,.portfolio-photo.photo-tall,.portfolio-photo.photo-short,.bridal-look,.bridal-look-wide{display:inline-block;vertical-align:top;break-inside:avoid;-webkit-column-break-inside:avoid;width:100%;height:auto;max-width:none;min-width:0;margin:0 0 20px;grid-row:auto;grid-column:auto;overflow:hidden}
+.bridal-look:nth-child(3){max-width:none;justify-self:auto}
+.portfolio-lightbox-trigger{height:auto;overflow:hidden}
+.portfolio-photo img,.bridal-look img,.bridal-look-wide img{position:static;display:block;width:100%;height:auto;max-width:100%;aspect-ratio:var(--photo-ratio,auto);object-fit:contain}
+.portfolio-photo figcaption{line-height:1.5;overflow-wrap:break-word}
+.video-heading{position:relative;clear:both}
+.mobile-menu-brand img{display:block;width:176px;max-width:100%;height:auto}
+@media(max-width:1000px){.portfolio-grid,.bridal-look-grid{columns:2;column-gap:16px}.portfolio-photo,.portfolio-photo.photo-tall,.portfolio-photo.photo-short,.bridal-look,.bridal-look-wide{margin-bottom:16px}}
+@media(max-width:600px){
+.portfolio-grid,.bridal-look-grid{columns:2;column-gap:12px}
+.portfolio-photo,.portfolio-photo.photo-tall,.portfolio-photo.photo-short,.bridal-look,.bridal-look-wide{height:auto;margin-bottom:12px}
+.portfolio-photo figcaption{font-size:10px;letter-spacing:.03em;padding:24px 10px 10px}
+.bridal-look figcaption{font-size:10px;gap:8px;padding-top:10px;line-height:1.5}
+.mobile-menu-brand img{width:164px}.mobile-menu-top{gap:16px}
+}
