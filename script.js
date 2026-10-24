@@ -61,7 +61,7 @@ window.addEventListener('pageshow', queueBookingBarUpdate);
 updateBookingBar();
 
 // Shared, progressively enhanced portfolio lightbox (one set per gallery).
-const portfolioSets = [...document.querySelectorAll('.portfolio-grid, .bridal-look-grid, .detail-gallery-grid')];
+const portfolioSets = [...document.querySelectorAll('[data-portfolio-set]'), ...document.querySelectorAll('.portfolio-grid, .bridal-look-grid, .detail-gallery-grid')].filter(gallery => gallery.matches('[data-portfolio-set]') || !gallery.closest('[data-portfolio-set]'));
 if (portfolioSets.length) {
   const english = document.documentElement.lang.startsWith('en');
   const icon = (path) => `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="${path}"/></svg>`;
@@ -143,3 +143,23 @@ if (portfolioSets.length) {
     touchStart = null;
   }, { passive: true });
 }
+
+// Reveal extra bridal photos below the initial masonry without reordering it.
+document.querySelectorAll('[data-portfolio-set]').forEach(section => {
+  const button = section.querySelector('[data-gallery-toggle]');
+  const more = section.querySelector('.gallery-more');
+  const summary = section.querySelector('[data-gallery-summary]');
+  if (!button || !more) return;
+  const total = section.querySelectorAll('figure').length;
+  const initial = Number(section.dataset.initialCount || 6);
+  const english = document.documentElement.lang.startsWith('en');
+  function setExpanded(expanded) {
+    more.hidden = !expanded;
+    button.setAttribute('aria-expanded', String(expanded));
+    button.querySelector('span').textContent = expanded ? button.dataset.hideLabel : button.dataset.showLabel;
+    summary.textContent = english ? `Showing ${expanded ? total : initial} of ${total} bridal photos` : `Mostrando ${expanded ? total : initial} de ${total} fotos de novias`;
+  }
+  setExpanded(false);
+  button.hidden = false;
+  button.addEventListener('click', () => setExpanded(button.getAttribute('aria-expanded') !== 'true'));
+});
