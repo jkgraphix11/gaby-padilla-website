@@ -261,3 +261,11 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 .gallery-visible-count{margin:0;font-size:12px;color:var(--muted);line-height:1.6}
 .gallery-more{margin-top:20px}
 @media(max-width:600px){.gallery-toggle{max-width:100%;padding:14px 18px;font-size:12px}.gallery-expansion-controls{margin-top:18px}}
+
+/* Bridal portfolios use full-width justified rows instead of balanced columns. */
+.bridal-look-grid.justified-gallery{display:flex;flex-direction:column;columns:auto;gap:28px;width:100%}
+.justified-row{display:flex;align-items:flex-start;gap:var(--justified-gap);width:100%;min-width:0}
+.justified-gallery .bridal-look,.justified-gallery .bridal-look-wide{display:block;flex:0 0 var(--tile-width);width:var(--tile-width);max-width:none;margin:0;height:auto;overflow:hidden}
+.justified-gallery .bridal-look img{width:100%;height:auto;object-fit:contain;aspect-ratio:var(--photo-ratio,auto)}
+.justified-gallery .bridal-look figcaption{gap:10px;font-size:11px;letter-spacing:0;line-height:1.6;overflow-wrap:break-word}
+@media(max-width:600px){.bridal-look-grid.justified-gallery{gap:20px}.justified-gallery .bridal-look figcaption{font-size:10px;gap:6px}}

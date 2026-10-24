@@ -163,3 +163,68 @@ document.querySelectorAll('[data-portfolio-set]').forEach(section => {
   button.hidden = false;
   button.addEventListener('click', () => setExpanded(button.getAttribute('aria-expanded') !== 'true'));
 });
+
+// Justified bridal rows preserve full photo proportions and fill every row.
+const justifiedGalleryRecords = new WeakMap();
+function layoutJustifiedGallery(gallery) {
+  const width = gallery.clientWidth;
+  if (!width) return;
+  let record = justifiedGalleryRecords.get(gallery);
+  if (!record) {
+    record = { figures: [...gallery.querySelectorAll('figure')], width: 0 };
+    justifiedGalleryRecords.set(gallery, record);
+  }
+  if (Math.abs(record.width - width) < 0.5) return;
+  record.width = width;
+  const figures = record.figures;
+  const ratios = figures.map(f => {
+    const img = f.querySelector('img');
+    return Number(img.getAttribute('width')) / Number(img.getAttribute('height'));
+  });
+  const gap = width <= 600 ? 12 : 20;
+  const target = width <= 600 ? Math.min(220, Math.max(160, width * .55)) : Math.min(420, width * .36);
+  const maxPerRow = width < 600 ? 3 : width < 1000 ? 4 : 5;
+  const costs = Array(figures.length + 1).fill(Infinity);
+  const next = Array(figures.length).fill(0);
+  costs[figures.length] = 0;
+  for (let start = figures.length - 1; start >= 0; start--) {
+    let sum = 0;
+    for (let end = start; end < Math.min(figures.length, start + maxPerRow); end++) {
+      sum += ratios[end];
+      const count = end - start + 1;
+      const height = (width - gap * (count - 1)) / sum;
+      const penalty = Math.log(height / target) ** 2 + (height > target * 1.8 ? 3 : 0) + (count === 1 ? .3 : 0);
+      if (penalty + costs[end + 1] < costs[start]) {
+        costs[start] = penalty + costs[end + 1];
+        next[start] = end + 1;
+      }
+    }
+  }
+  const fragment = document.createDocumentFragment();
+  for (let start = 0; start < figures.length; start = next[start]) {
+    const end = next[start];
+    const sum = ratios.slice(start, end).reduce((a, b) => a + b, 0);
+    const height = (width - gap * (end - start - 1)) / sum;
+    const row = document.createElement('div');
+    row.className = 'justified-row';
+    row.style.setProperty('--justified-gap', `${gap}px`);
+    for (let index = start; index < end; index++) {
+      figures[index].style.setProperty('--tile-width', `${height * ratios[index]}px`);
+      row.append(figures[index]);
+    }
+    fragment.append(row);
+  }
+  gallery.replaceChildren(fragment);
+  gallery.classList.add('justified-gallery');
+}
+document.querySelectorAll('[data-portfolio-set] .bridal-look-grid').forEach(gallery => {
+  layoutJustifiedGallery(gallery);
+  let frame = 0;
+  new ResizeObserver(() => {
+    if (frame) return;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      layoutJustifiedGallery(gallery);
+    });
+  }).observe(gallery);
+});
