@@ -269,3 +269,10 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 .justified-gallery .bridal-look img{width:100%;height:auto;object-fit:contain;aspect-ratio:var(--photo-ratio,auto)}
 .justified-gallery .bridal-look figcaption{gap:10px;font-size:11px;letter-spacing:0;line-height:1.6;overflow-wrap:break-word}
 @media(max-width:600px){.bridal-look-grid.justified-gallery{gap:20px}.justified-gallery .bridal-look figcaption{font-size:10px;gap:6px}}
+
+/* Keep the complete studio portrait visible on larger screens. */
+@media(min-width:601px){
+.portrait-break{background:#e9e9eb}
+.portrait-break-img{display:flex;justify-content:center;height:clamp(340px,38vw,680px);background:linear-gradient(90deg,#e2e2e4,#f0f0f2 60%,#e7e7e9)}
+.portrait-break img{display:block;flex:none;width:auto;max-width:100%;height:100%;object-fit:contain;object-position:center;-webkit-mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent);mask-image:linear-gradient(90deg,transparent,#000 2%,#000 98%,transparent)}
+}
