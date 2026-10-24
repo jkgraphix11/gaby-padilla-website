@@ -90,6 +90,7 @@ if (portfolioSets.length) {
     const figures = [...gallery.querySelectorAll('figure')].filter(f => f.querySelector('img'));
     const set = figures.map(figure => {
       const img = figure.querySelector('img');
+      img.style.setProperty('--photo-ratio', `${img.getAttribute('width')} / ${img.getAttribute('height')}`);
       let trigger = figure.querySelector('a');
       if (!trigger) {
         trigger = document.createElement('button');

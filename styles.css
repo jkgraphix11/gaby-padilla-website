@@ -227,3 +227,6 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 .lightbox-prev,.lightbox-next{top:auto;bottom:calc(22px + env(safe-area-inset-bottom))}
 .lightbox-prev{left:calc(50% - 62px)}.lightbox-next{right:calc(50% - 62px)}
 }
+
+/* Reserve space before lazy-loaded bridal photos arrive in mobile Safari. */
+@media(max-width:600px){.bridal-look img,.bridal-look-wide img{aspect-ratio:var(--photo-ratio,3 / 4)}}
