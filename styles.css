@@ -250,3 +250,6 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 .bridal-look figcaption{font-size:10px;gap:8px;padding-top:10px;line-height:1.5}
 .mobile-menu-brand img{width:164px}.mobile-menu-top{gap:16px}
 }
+
+/* Four bridal photos fill two balanced columns, with no unused third column. */
+.bridal-look-grid{width:100%;columns:2;column-fill:balance}
