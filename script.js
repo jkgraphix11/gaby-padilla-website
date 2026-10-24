@@ -153,11 +153,12 @@ document.querySelectorAll('[data-portfolio-set]').forEach(section => {
   const total = section.querySelectorAll('figure').length;
   const initial = Number(section.dataset.initialCount || 6);
   const english = document.documentElement.lang.startsWith('en');
+  const photoType = section.dataset.photoType === 'makeup' ? (english ? 'makeup photos' : 'fotos de maquillaje') : (english ? 'bridal photos' : 'fotos de novias');
   function setExpanded(expanded) {
     more.hidden = !expanded;
     button.setAttribute('aria-expanded', String(expanded));
     button.querySelector('span').textContent = expanded ? button.dataset.hideLabel : button.dataset.showLabel;
-    summary.textContent = english ? `Showing ${expanded ? total : initial} of ${total} bridal photos` : `Mostrando ${expanded ? total : initial} de ${total} fotos de novias`;
+    summary.textContent = english ? `Showing ${expanded ? total : initial} of ${total} ${photoType}` : `Mostrando ${expanded ? total : initial} de ${total} ${photoType}`;
   }
   setExpanded(false);
   button.hidden = false;
