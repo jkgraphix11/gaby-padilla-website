@@ -114,3 +114,20 @@ html{scroll-padding-top:105px}section[id],main[id]{scroll-margin-top:100px}
 
 /* Services links land at the heading beneath the pinned header. */
 #servicios{scroll-margin-top:0}
+
+/* Two identical, nonshrinking ticker groups form a seamless loop. */
+.identity-track{display:flex;width:max-content;overflow:visible;flex-shrink:0;animation:continuous-ticker 47s linear infinite;will-change:transform}
+.identity-track>.identity-group{display:flex;align-items:center;justify-content:space-around;flex:0 0 auto;min-width:100vw;width:max-content;animation:none}
+@keyframes continuous-ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(min-width:601px){
+.hero,.detail-hero{min-height:clamp(660px,calc(100svh - 117px),900px);max-height:none}
+.detail-hero-inner{padding-top:60px;padding-bottom:60px}
+}
+@media(min-width:601px) and (max-width:1100px){
+.hero,.detail-hero{min-height:clamp(640px,calc(100svh - 104px),850px)}
+}
+@media(max-width:600px){
+.detail-hero{min-height:calc(100svh - 70px)}
+.detail-hero-visual{flex:1 0 320px;height:320px;min-height:320px}
+}
+@media(prefers-reduced-motion:reduce){.identity-track{animation:none}}
