@@ -68,3 +68,7 @@
 @media(max-width:900px) and (min-width:601px){.bridal-look-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bridal-look:nth-child(3){grid-column:1/-1;max-width:60%;justify-self:center}}
 @media(max-width:600px){.bridal-look-grid{grid-template-columns:1fr;gap:30px}.bridal-showcase .detail-gallery-heading h2{font-size:49px}.bridal-look img{aspect-ratio:auto}.bridal-look-wide{grid-column:auto}.bridal-look-wide img{aspect-ratio:auto}}
 @media(prefers-reduced-motion:reduce){.bridal-look img{transition:none}}
+
+/* Four service areas, including Tecate. */
+.local-area-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:600px){.local-area-grid{grid-template-columns:1fr}}

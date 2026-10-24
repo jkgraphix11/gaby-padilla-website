@@ -45,3 +45,9 @@ Upload and test the site; both HTML pages are crawlable. **Do not paste an inven
 - [ ] Do not present the 180/150-minute booking slot as total multi-visit package time.
 - [ ] Update BOOKING_URLS when individual AgendaPro service deep links are confirmed working.
 - [ ] Check reservation and installment terms with Gaby before publishing changes to either system.
+
+## Tecate wedding and event coverage
+- Both language homepages and service pages include Tecate in titles, descriptions, service-area copy, FAQs and areaServed structured data.
+- Keep Tecate positioned as an on-location service area; the studio remains in Playas de Tijuana. Confirm travel arrangements and quotes before booking.
+- At production launch, inspect these pages in Search Console for Tecate bridal, quinceañera and event searches. Add real Tecate event photos and venue details when supplied; create a dedicated location page only when there is enough original local content.
+- Staging remains noindex. Enable indexing and complete canonical/hreflang setup only on the confirmed production domain.
