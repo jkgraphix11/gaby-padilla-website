@@ -280,3 +280,7 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 /* Give service hero copy a more generous left inset. */
 @media(min-width:821px){.detail-hero-inner{padding-left:clamp(56px,7vw,128px);max-width:780px}}
 @media(min-width:601px) and (max-width:820px){.detail-hero-inner{padding-left:40px}}
+
+/* Align homepage hero copy with the service hero inset. */
+@media(min-width:821px){.hero-copy-inner{width:100%;max-width:780px;margin:0;padding-left:clamp(56px,7vw,128px)}}
+@media(min-width:601px) and (max-width:820px){.hero-copy-inner{width:100%;margin:0;padding-left:40px}}
