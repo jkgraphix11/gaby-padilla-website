@@ -11,15 +11,31 @@ document.querySelectorAll('[data-booking]').forEach(a => {
 });
 const toggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('mobile-menu');
+const menuClose = document.getElementById('menu-close');
+const backgroundRegions = document.querySelectorAll('main, footer, .topline, .header-inner, .mobile-booking-bar');
 function setMenuOpen(open) {
+  const hadFocus = menu.contains(document.activeElement);
   menu.hidden = !open;
   toggle.setAttribute('aria-expanded', String(open));
   document.documentElement.classList.toggle('menu-open', open);
   document.body.classList.toggle('menu-open', open);
+  backgroundRegions.forEach(region => region.inert = open);
+  if (open) menuClose.focus({ preventScroll: true });
+  else if (hadFocus) toggle.focus({ preventScroll: true });
 }
 toggle.addEventListener('click', () => setMenuOpen(menu.hidden));
+menuClose.addEventListener('click', () => setMenuOpen(false));
 menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuOpen(false)));
-document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenuOpen(false); });
+document.addEventListener('keydown', e => {
+  if (menu.hidden) return;
+  if (e.key === 'Escape') { e.preventDefault(); setMenuOpen(false); }
+  if (e.key === 'Tab') {
+    const items = [...menu.querySelectorAll('button, a[href]')];
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
 window.addEventListener('resize', () => { if (window.innerWidth > 1100) setMenuOpen(false); });
 document.getElementById('year').textContent = new Date().getFullYear();
 
