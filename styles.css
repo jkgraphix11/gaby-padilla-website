@@ -230,3 +230,5 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 
 /* Reserve space before lazy-loaded bridal photos arrive in mobile Safari. */
 @media(max-width:600px){.bridal-look img,.bridal-look-wide img{aspect-ratio:var(--photo-ratio,3 / 4)}}
+
+.lang-switch{display:inline-flex;align-items:center;justify-content:center;gap:8px}.language-globe{display:block;width:20px;height:20px;flex:none}
