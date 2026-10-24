@@ -291,12 +291,12 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 /* Smaller package headings on mobile, with safe wrapping for enlarged text. */
 @media (max-width:600px) {
   .feature-copy h3 {
-    font-size:38px;
+    font-size:46px;
     line-height:1.15;
     white-space:normal;
     overflow-wrap:anywhere;
   }
 }
 @media (max-width:380px) {
-  .feature-copy h3 { font-size:32px; }
+  .feature-copy h3 { font-size:40px; }
 }
