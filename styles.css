@@ -52,3 +52,19 @@
 .service-duration{font-size:11px;letter-spacing:.06em;color:var(--muted);font-weight:500}
 .booking-duration{margin:12px 0;line-height:1.7}
 @media(max-width:600px){.service-price-meta{gap:2px}.service-duration{font-size:10px}}
+
+/* Bridal portfolio: append figures to grow the collection. */
+.bridal-showcase .detail-gallery-heading{max-width:780px;margin-bottom:42px}
+.bridal-showcase .detail-gallery-heading h2{font-size:clamp(48px,5.5vw,78px);line-height:1.08}
+.bridal-showcase .detail-gallery-heading p{max-width:590px;line-height:1.85;color:var(--muted,#6c655e)}
+.bridal-gallery-hint{display:block;margin-top:18px;font-size:11px;letter-spacing:.04em;color:#655d56}
+.bridal-look-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px 22px}
+.bridal-look{margin:0;min-width:0}.bridal-look a{display:block;overflow:hidden;background:#d5c9bc}
+.bridal-look img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 38%;transition:transform .35s ease}
+.bridal-look a:hover img{transform:scale(1.025)}.bridal-look a:focus-visible{outline:3px solid #30281f;outline-offset:5px}
+.bridal-look figcaption{display:flex;gap:15px;padding:16px 0 0;font-size:12px;line-height:1.6}
+.bridal-look figcaption span{font-size:10px;color:#74675d;letter-spacing:.1em}
+.bridal-look-wide{grid-column:1/-1}.bridal-look-wide img{aspect-ratio:3/2;object-position:center}
+@media(max-width:900px) and (min-width:601px){.bridal-look-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bridal-look:nth-child(3){grid-column:1/-1;max-width:60%;justify-self:center}}
+@media(max-width:600px){.bridal-look-grid{grid-template-columns:1fr;gap:30px}.bridal-showcase .detail-gallery-heading h2{font-size:49px}.bridal-look img{aspect-ratio:auto}.bridal-look-wide{grid-column:auto}.bridal-look-wide img{aspect-ratio:auto}}
+@media(prefers-reduced-motion:reduce){.bridal-look img{transition:none}}
