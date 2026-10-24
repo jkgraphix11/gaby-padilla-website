@@ -217,7 +217,7 @@ function layoutJustifiedGallery(gallery) {
   gallery.replaceChildren(fragment);
   gallery.classList.add('justified-gallery');
 }
-document.querySelectorAll('[data-portfolio-set] .bridal-look-grid').forEach(gallery => {
+document.querySelectorAll('[data-portfolio-set] .bridal-look-grid, .quince-showcase .bridal-look-grid').forEach(gallery => {
   layoutJustifiedGallery(gallery);
   let frame = 0;
   new ResizeObserver(() => {
