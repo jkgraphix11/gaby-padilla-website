@@ -30,3 +30,5 @@
 @media(max-width:1000px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.product-grid{gap:28px 13px}.product-art img{padding:12px}.product-title{min-height:59px}.product-summary{font-size:10px;line-height:1.7;min-height:86px}.product-size{min-height:34px}.product-price{font-size:17px}.product-buy{font-size:10px;padding:10px 6px;min-height:46px}.detail-image{padding-top:0}.detail-image img{padding:15px}.hero-still .still-cream{width:39%;left:7%;bottom:6%}.hero-still .still-serum{width:44%;right:7%;bottom:6%}}
 .product-grid .product-card .product-art{background:#fff}
+
+#language{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;font-size:11px;font-weight:700;letter-spacing:.1em}#language .language-globe{display:block;width:20px;height:20px;flex:none}

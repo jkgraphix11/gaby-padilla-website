@@ -18,7 +18,10 @@ translate();
 document.getElementById('year').textContent = new Date().getFullYear();
 document.getElementById('preview-bar').hidden = !preview;
 document.getElementById('language').href = `?lang=${lang === 'en' ? 'es' : 'en'}${preview ? '&preview=1' : ''}`;
-document.getElementById('language').textContent = lang === 'en' ? 'ES ↗' : 'EN ↗';
+document.getElementById('language-label').textContent = lang === 'en' ? 'ES' : 'EN';
+document.getElementById('language').setAttribute('aria-label', lang === 'en' ? 'Cambiar a español' : 'Switch to English');
+document.getElementById('language').hreflang = lang === 'en' ? 'es' : 'en';
+document.getElementById('language').lang = lang === 'en' ? 'es' : 'en';
 document.getElementById('shop-home').href = `./${location.search}`;
 document.getElementById('manage-link').href = `manage.html?preview=1&lang=${lang}`;
 function imageURL(p) {
