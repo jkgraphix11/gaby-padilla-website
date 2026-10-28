@@ -1,7 +1,7 @@
 {
   "currency": "MXN",
   "whatsapp": "526643867831",
-  "previewVersion": 4,
+  "previewVersion": 5,
   "products": [
     {
       "id": "DPzHBIqgRzn",
@@ -25,24 +25,24 @@
       "name": "The Water Cream · Crema facial",
       "name_en": "The Water Cream · Face Cream",
       "brand": "TATCHA",
-      "size": "Presentación por confirmar",
+      "size": "",
       "category": "skincare",
       "price": 1200,
       "quantity": null,
       "state": "draft",
       "image": "assets/products/tatcha-water-cream.jpg",
-      "description": "Crema facial ligera y libre de aceites para hidratar sin una sensación pesada. Pensada especialmente para piel mixta o grasa, ayuda a suavizar la textura y reducir la apariencia de los poros para un acabado fresco y terso. Ideal si buscas una hidratante cómoda para el día a día. Confirma con Gaby la presentación disponible.",
-      "description_en": "A lightweight, oil-free face cream that hydrates without a heavy feel. Especially suited to combination or oily skin, it helps soften texture and make pores look less noticeable for a fresh, smooth finish. A daily moisturizer for skin that needs hydration with a light touch. Confirm the available size with Gaby.",
+      "description": "Crema facial ligera y libre de aceites para hidratar sin una sensación pesada. Pensada especialmente para piel mixta o grasa, ayuda a suavizar la textura y reducir la apariencia de los poros para un acabado fresco y terso. Ideal si buscas una hidratante cómoda para el día a día.",
+      "description_en": "A lightweight, oil-free face cream that hydrates without a heavy feel. Especially suited to combination or oily skin, it helps soften texture and make pores look less noticeable for a fresh, smooth finish. A daily moisturizer for skin that needs hydration with a light touch.",
       "price_confirmed": true,
       "stock_confirmed": false,
-      "size_en": "Size to confirm"
+      "size_en": ""
     },
     {
       "id": "DPPFRqxARKB",
       "name": "Studio Fix Fluid · Base de maquillaje",
       "name_en": "Studio Fix Fluid · Foundation",
       "brand": "M·A·C",
-      "size": "Tono NC25 · Contenido por confirmar",
+      "size": "Tono NC25",
       "category": "makeup",
       "price": 600,
       "quantity": null,
@@ -52,7 +52,7 @@
       "description_en": "A liquid foundation with buildable medium-to-full coverage. Its soft-matte finish helps control shine and even out the complexion while feeling lightweight on skin. Layer it where you want extra coverage for a smooth, polished look. Available in NC25; confirm that this shade is right for you before ordering.",
       "price_confirmed": true,
       "stock_confirmed": false,
-      "size_en": "Shade NC25 · Size to confirm"
+      "size_en": "Shade NC25"
     },
     {
       "id": "DPPEyagAWmG",
@@ -76,17 +76,17 @@
       "name": "Lip Maestro Satin · Labial líquido",
       "name_en": "Lip Maestro Satin · Liquid Lipstick",
       "brand": "ARMANI",
-      "size": "Tono y presentación por confirmar",
+      "size": "",
       "category": "makeup",
       "price": 600,
       "quantity": null,
       "state": "draft",
       "image": "assets/products/armani.jpg",
-      "description": "Labial líquido de acabado satinado para dar color intenso y luminosidad a los labios. Su textura ligera aporta comodidad e hidratación, mientras el aplicador en forma de diamante facilita definir el contorno y rellenar con precisión. Una opción para unos labios con color y un brillo suave. Confirma el tono y la presentación con Gaby.",
-      "description_en": "A satin-finish liquid lipstick for rich color with a luminous look. Its lightweight texture offers comfort and hydration, while the diamond-shaped applicator helps define the lip line and fill in precisely. Choose it for expressive lip color with a soft sheen. Confirm the shade and size with Gaby.",
+      "description": "Labial líquido de acabado satinado para dar color intenso y luminosidad a los labios. Su textura ligera aporta comodidad e hidratación, mientras el aplicador en forma de diamante facilita definir el contorno y rellenar con precisión. Una opción para unos labios con color y un brillo suave.",
+      "description_en": "A satin-finish liquid lipstick for rich color with a luminous look. Its lightweight texture offers comfort and hydration, while the diamond-shaped applicator helps define the lip line and fill in precisely. Choose it for expressive lip color with a soft sheen.",
       "price_confirmed": true,
       "stock_confirmed": false,
-      "size_en": "Shade and size to confirm"
+      "size_en": ""
     }
   ]
 }

@@ -42,6 +42,17 @@ class CatalogTests(unittest.TestCase):
     def test_persists_across_process_connections(self):
         p=self.create();self.publish(p['id'],1)
         other=Store(self.store.path);self.assertEqual(other.catalog()['products'][0]['name'],self.product['name'])
+    def test_optional_size_can_be_omitted_blank_or_null_and_published(self):
+        for value in [None, '', '   ', 'missing']:
+            with self.subTest(value=value):
+                product={**self.product,'size':value}
+                if value=='missing': product.pop('size')
+                draft=self.store.draft(product)
+                self.publish(draft['id'],1)
+                self.assertEqual(self.store.get(draft['id'])['live']['size'],'')
+        for invalid in [42, [], 'x'*101]:
+            with self.subTest(invalid=invalid):
+                with self.assertRaises(CatalogError): self.store.draft({**self.product,'size':invalid})
     def test_clean_upload(self):
         from PIL import Image
         root=Path(self.temp.name)/'site';(root/'tienda').mkdir(parents=True)

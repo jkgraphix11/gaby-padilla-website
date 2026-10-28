@@ -47,7 +47,7 @@ function render() {
    </button>
    <p class="product-brand">${escapeHTML(p.brand)}</p>
    <h3 class="product-title"><button type="button" data-product="${escapeHTML(p.id)}">${escapeHTML(label(p))}</button></h3>
-   <p class="product-size">${escapeHTML(localized(p, 'size'))}</p>
+   ${localized(p, 'size')?.trim() ? `<p class="product-size">${escapeHTML(localized(p, 'size'))}</p>` : ''}
    <p class="product-summary">${escapeHTML((localized(p, 'description') || '').split('. ')[0])}.</p>
    <div class="product-bottom"><span class="product-price">${priceLabel(p)}</span><button type="button" class="product-more" data-product="${escapeHTML(p.id)}">${t('Ver detalles ↗', 'View details ↗')}</button></div>
    <a class="whatsapp-button product-buy" data-buy="${escapeHTML(p.id)}" href="${escapeHTML(makeLink(orderMessage(p)))}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(buyLabel(p) + ' · ' + label(p))}">${buyLabel(p)}</a>
@@ -63,7 +63,7 @@ function openProduct(id) {
    <div class="detail-copy">
     <span class="eyebrow">${escapeHTML(p.brand)}</span>
     <h2 id="detail-title">${escapeHTML(label(p))}</h2>
-    <p class="detail-size">${escapeHTML(localized(p, 'size'))}</p>
+    ${localized(p, 'size')?.trim() ? `<p class="detail-size">${escapeHTML(localized(p, 'size'))}</p>` : ''}
     <p class="detail-description">${escapeHTML(localized(p, 'description'))}</p>
     ${p.image_note ? `<p class="detail-note">${escapeHTML(localized(p, 'image_note'))}</p>` : ''}
     <p class="detail-price">${priceLabel(p)}</p>
@@ -88,9 +88,11 @@ function orderMessage(p, q = 1) {
  url.search = '';
  url.hash = p.id;
  if (p.quantity === 0) return t(`¡Hola, Gaby! Me interesa ${p.name}. ¿Me avisas si vuelve a estar disponible?\n\n${url.href}`, `Hi Gaby! I’m interested in ${label(p)}. Could you let me know if it becomes available again?\n\n${url.href}`);
+ const size = localized(p, 'size')?.trim();
+ const sizeLine = size ? t(`\nPresentación: ${size}`, `\nSize / shade: ${size}`) : '';
  const price = p.price == null ? t('Precio por confirmar', 'Price to confirm') : `${money(p.price)} MXN`;
  const subtotal = p.price == null ? '' : t(`\nSubtotal de productos: ${money(p.price * q)} MXN`, `\nProduct subtotal: ${money(p.price * q)} MXN`);
- return t(`¡Hola, Gaby! Me gustaría pedir:\n\n${q} × ${p.name}\nPresentación: ${p.size}\nPrecio por pieza: ${price}${subtotal}\n\n¿Sigue disponible? ¿Cómo coordinamos el pago y la entrega en Tijuana?\n\n${url.href}`, `Hi Gaby! I’d like to order:\n\n${q} × ${label(p)}\nSize / shade: ${localized(p, 'size')}\nUnit price: ${price}${subtotal}\n\nIs it still available? How can we arrange payment and delivery in Tijuana?\n\n${url.href}`);
+ return t(`¡Hola, Gaby! Me gustaría pedir:\n\n${q} × ${p.name}${sizeLine}\nPrecio por pieza: ${price}${subtotal}\n\n¿Sigue disponible? ¿Cómo coordinamos el pago y la entrega en Tijuana?\n\n${url.href}`, `Hi Gaby! I’d like to order:\n\n${q} × ${label(p)}${sizeLine}\nUnit price: ${price}${subtotal}\n\nIs it still available? How can we arrange payment and delivery in Tijuana?\n\n${url.href}`);
 }
 function makeLink(message) { return `https://wa.me/${catalog.whatsapp}?text=${encodeURIComponent(message)}`; }
 function showMessage(message) {

@@ -47,13 +47,19 @@ class Store:
         return {'draft':{**json.loads(r['draft']),'id':pid},'live':json.loads(r['live']) if r['live'] else None,'state':r['state'],'revision':r['revision']}
     def validate(self,data):
         result={}
-        for field,limit in [('name',140),('brand',80),('size',100),('description',1600)]:
+        for field,limit in [('name',140),('brand',80),('description',1600)]:
             s=data.get(field)
             if not isinstance(s,str) or not s.strip() or len(s)>limit: raise CatalogError('Revisa el campo '+field+'.')
             result[field]=s.strip()
-        for field in ['name_en','description_en']:
+        size=data.get('size')
+        if size is None: size=''
+        if not isinstance(size,str) or len(size)>100: raise CatalogError('Presentación o tono no válido.')
+        result['size']=size.strip()
+        for field in ['name_en','description_en','size_en']:
             if field in data:
-                if not isinstance(data[field],str) or len(data[field])>1600: raise CatalogError('Traducción no válida.')
+                if field=='size_en' and data[field] is None:
+                    result[field]=''; continue
+                if not isinstance(data[field],str) or len(data[field])>(100 if field=='size_en' else 1600): raise CatalogError('Traducción no válida.')
                 result[field]=data[field].strip()
         price,qty=data.get('price'),data.get('quantity')
         if isinstance(price,bool) or not isinstance(price,(int,float)) or not 0<price<=1000000: raise CatalogError('Precio no válido.')
