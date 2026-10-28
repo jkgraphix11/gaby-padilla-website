@@ -51,7 +51,7 @@ function render() {
    <p class="product-brand">${escapeHTML(p.brand)}</p>
    <h3 class="product-title"><button type="button" data-product="${escapeHTML(p.id)}">${escapeHTML(label(p))}</button></h3>
    ${localized(p, 'size')?.trim() ? `<p class="product-size">${escapeHTML(localized(p, 'size'))}</p>` : ''}
-   <p class="product-summary">${escapeHTML((localized(p, 'description') || '').split('. ')[0])}.</p>
+   <p class="product-summary">${escapeHTML(localized(p, 'description') || '')}</p>
    <div class="product-bottom"><span class="product-price">${priceLabel(p)}</span><button type="button" class="product-more" data-product="${escapeHTML(p.id)}">${t('Ver detalles ↗', 'View details ↗')}</button></div>
    <a class="whatsapp-button product-buy" data-buy="${escapeHTML(p.id)}" href="${escapeHTML(makeLink(orderMessage(p)))}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHTML(buyLabel(p) + ' · ' + label(p))}">${buyLabel(p)}</a>
   </article>`).join('') || `<p class="empty-state">${t('Por ahora no hay productos en esta selección. Pregunta a Gaby por WhatsApp.', 'No products in this selection right now. Ask Gaby on WhatsApp.')}</p>`;

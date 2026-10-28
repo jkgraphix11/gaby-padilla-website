@@ -32,3 +32,6 @@
 .product-grid .product-card .product-art{background:#fff}
 
 #language{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;min-height:44px;font-size:11px;font-weight:700;letter-spacing:.1em}#language .language-globe{display:block;width:20px;height:20px;flex:none}
+
+/* Keep card descriptions to three lines while details retain the full text. */
+.product-card .product-summary{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;overflow:hidden;min-height:0;height:5.4em;line-height:1.8}
