@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://gabypadillamakeup.com/</loc>
+    <image:image>
+      <image:loc>https://gabypadillamakeup.com/assets/images/gaby-padilla-portrait-maquillista-tijuana.jpg</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://gabypadillamakeup.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabypadillamakeup.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabypadillamakeup.com/" />
+  </url>
+  <url>
+    <loc>https://gabypadillamakeup.com/en/</loc>
+    <image:image>
+      <image:loc>https://gabypadillamakeup.com/assets/images/gaby-padilla-portrait-maquillista-tijuana.jpg</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://gabypadillamakeup.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabypadillamakeup.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabypadillamakeup.com/" />
+  </url>
+  <url>
+    <loc>https://gabypadillamakeup.com/novias/</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://gabypadillamakeup.com/novias/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabypadillamakeup.com/en/bridal/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabypadillamakeup.com/novias/" />
+  </url>
+  <url>
+    <loc>https://gabypadillamakeup.com/en/bridal/</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://gabypadillamakeup.com/novias/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabypadillamakeup.com/en/bridal/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabypadillamakeup.com/novias/" />
+  </url>
+  <url>
+    <loc>https://gabypadillamakeup.com/xv-anos/</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://gabypadillamakeup.com/xv-anos/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabypadillamakeup.com/en/quinceanera/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabypadillamakeup.com/xv-anos/" />
+  </url>
+  <url>
+    <loc>https://gabypadillamakeup.com/en/quinceanera/</loc>
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://gabypadillamakeup.com/xv-anos/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://gabypadillamakeup.com/en/quinceanera/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://gabypadillamakeup.com/xv-anos/" />
+  </url>
+</urlset>
