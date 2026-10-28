@@ -1,6 +1,6 @@
 # Gaby Padilla Makeup Artist — GitHub Pages staging
 
-This repository contains the website and WhatsApp shop preview. GitHub Pages serves the `shop-whatsapp-staging` branch; the separate Namecheap production website is unchanged.
+This repository contains the website and WhatsApp shop preview. GitHub Pages serves the `shop-whatsapp-staging` branch. Production deploys separately from `main` to Namecheap.
 
 ## Hosted staging
 

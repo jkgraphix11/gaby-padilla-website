@@ -57,6 +57,7 @@ jobs:
           for name in ['index.html', 'styles.css', 'script.js', 'usd-pricing.json', 'robots.txt', 'sitemap.xml']:
               shutil.copy2(name, out / name)
           PY
+          python3 shop-service/prepare_storefront.py . _publish
 
       - name: Load deployment key
         shell: bash
@@ -107,7 +108,7 @@ jobs:
       - name: Check public pages
         if: env.DEPLOY == 'true'
         run: |
-          for page in "" novias/ xv-anos/ en/ en/bridal/ en/quinceanera/; do
+          for page in "" novias/ xv-anos/ en/ en/bridal/ en/quinceanera/ tienda/; do
             curl --fail --silent --show-error --location --max-redirs 5 --max-time 30 "https://gabypadillamakeup.com/$page" > "$RUNNER_TEMP/live-page.html"
             grep -q 'https://gabypadillamakeup.com/' "$RUNNER_TEMP/live-page.html"
             if grep -qi noindex "$RUNNER_TEMP/live-page.html"; then
@@ -122,3 +123,4 @@ jobs:
         run: |
           rm -f ~/.ssh/namecheap_deploy "$RUNNER_TEMP/namecheap-askpass"
           if [ -n "${SSH_AGENT_PID:-}" ]; then ssh-agent -k; fi
+

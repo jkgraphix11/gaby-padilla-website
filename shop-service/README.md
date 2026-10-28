@@ -1,4 +1,10 @@
-# Gaby’s product shop — first local pilot
+# Gaby’s WhatsApp storefront and future administration pilot
+
+## Storefront-first launch
+
+The owner approved a public storefront with real WhatsApp inquiries, manual catalog updates, and one unit of each of the five listed products. `tienda/catalog.json` is the current approved public catalog. Change that file to update stock/prices until authenticated administration is connected. Mark sold items with quantity zero or hide them by changing state; WhatsApp clicks never decrement stock automatically.
+
+`prepare_storefront.py` exports the public shop for Namecheap and excludes management/demo files. It disables preview behavior, enables indexing, adds the shop canonical/sitemap entry, and retains real WhatsApp links. The GitHub Pages staging environment retains preview simulation via `?preview=1`.
 
 ## What is built
 
@@ -7,8 +13,8 @@
 - Published zero-stock products remain visible with a restock inquiry instead of a purchase button. Hidden and draft products never appear in the public catalog.
 - Management page at `/tienda/manage.html`: photo upload, draft editing, explicit review/publish, sold-out/hide actions and restock via editing the same record.
 - A Python/SQLite local catalog service. Writes require bearer authorization. Approval requires the exact current revision. Draft and live snapshots are separate. Each successful mutation adds an audit event. Original live text stays unchanged when a pending edit exists.
-- `/tienda/?preview=1` and `manage.html?preview=1` are a safe design demo using generic fictional product illustrations, example prices and browser-session state. They do not call the mutation API or send WhatsApp messages. Same-tab navigation preserves simulated edits. These examples are not Gaby's inventory.
-- Source website navigation links to the staged shop. The existing `output/namecheap-production/` and production zip are unchanged. Nothing has been deployed to `gabypadillamakeup.com`.
+- `/tienda/?preview=1` and `manage.html?preview=1` simulate the approved product catalog and browser-session state. They do not call the mutation API or send WhatsApp messages. Same-tab navigation preserves simulated edits. The production export disables this mode.
+- Source website navigation links to the staged shop. The existing `output/namecheap-production/` and production zip are unchanged. The authenticated administration service is excluded from the public production package.
 
 ## Run locally
 
@@ -44,7 +50,7 @@ For an eventual Actions integration, `openaiFileIdRefs` can contain one document
 
 ## Photo → chat → approval → publication
 
-See ASSISTANT-INSTRUCTIONS.md for the exact workflow and guardrails. The intended minimum input is a clear product photo, MXN price, and unit count. Confirm unreadable brand/name and any relevant condition or expiry information. Size/shade may remain blank when unavailable. Photo retouching must preserve the actual package and label. No real product photo was supplied in this build, so no real listing or AI-cleaned sales image has been generated.
+See ASSISTANT-INSTRUCTIONS.md for the exact workflow and guardrails. The intended minimum input is a clear product photo, MXN price, and unit count. Confirm unreadable brand/name and any relevant condition or expiry information. Size/shade may remain blank when unavailable. Photo retouching must preserve the actual package and label. The current catalog uses the five reviewed product images; automatic photo cleanup and chat publishing are deferred.
 
 The local service provides inventory and approval behavior. The ChatGPT account connection, public hosting, and automatic image generation are still not configured. Do not promise a free shared chat or a particular paid plan will publish directly without testing its supported tool connection. New custom app/MCP integration should wrap the catalog methods with account-bound authentication; the REST routes are an implementation base, not a completed MCP server.
 

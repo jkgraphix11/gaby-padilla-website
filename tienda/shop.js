@@ -1,6 +1,6 @@
 'use strict';
 const params = new URLSearchParams(location.search);
-const preview = params.get('preview') === '1';
+const preview = params.get('preview') === '1' && document.querySelector('meta[name="shop-preview"]')?.content !== 'disabled';
 const lang = params.get('lang') === 'en' ? 'en' : 'es';
 const t = (es, en) => lang === 'en' ? en : es;
 const money = value => new Intl.NumberFormat(lang === 'en' ? 'en-US' : 'es-MX', {style: 'currency', currency: 'MXN', currencyDisplay: 'narrowSymbol', maximumFractionDigits: 2}).format(value);
@@ -111,7 +111,7 @@ function loadPreviewState(base) {
 }
 async function load() {
  try {
-  const response = await fetch(preview ? 'instagram-catalog.json' : '/api/catalog', {cache: 'no-store'});
+  const response = await fetch(preview ? 'instagram-catalog.json' : 'catalog.json', {cache: 'no-store'});
   if (!response.ok) throw Error('Unavailable');
   catalog = await response.json();
   if (preview) catalog = loadPreviewState(catalog);
