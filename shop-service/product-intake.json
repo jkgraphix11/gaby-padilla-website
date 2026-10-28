@@ -1,0 +1,86 @@
+{
+  "recorded_on": "2026-10-28",
+  "purpose": "Sources supplied by the owner for future store drafts. Not public inventory or approval to publish.",
+  "instagram_account_observed": "goodskinproducts",
+  "products": [
+    {
+      "source_url": "https://www.instagram.com/p/DPzHBIqgRzn/",
+      "status": "researched_draft_in_store_preview",
+      "name": "Calm The Red Down · Sérum de doble cámara",
+      "brand": "iNNBEAUTY PROJECT",
+      "size": "50 ml",
+      "current_price_mxn": 800,
+      "current_quantity": null,
+      "approved": false,
+      "source_observations": {
+        "package_text": "CALM THE RED DOWN · Dual-Chamber Serum",
+        "package_size": "50 ml",
+        "caption_price_mxn": 800,
+        "post_date": "2025-10-14",
+        "note": "Historical post price only. Exact brand, current price, quantity and photo rights/usable original still need confirmation."
+      },
+      "preview_image": "assets/products/innbeauty.jpg",
+      "posted_price_mxn": 800
+    },
+    {
+      "source_url": "https://www.instagram.com/p/DPzC1FRj1AL/",
+      "status": "researched_draft_in_store_preview",
+      "name": "The Water Cream · Crema facial",
+      "brand": "TATCHA",
+      "size": "Presentación por confirmar",
+      "current_price_mxn": 1200,
+      "current_quantity": null,
+      "approved": false,
+      "preview_image": "assets/products/tatcha-water-cream.jpg",
+      "posted_price_mxn": null
+    },
+    {
+      "source_url": "https://www.instagram.com/p/DPPFRqxARKB/",
+      "status": "researched_draft_in_store_preview",
+      "name": "Studio Fix Fluid · Base de maquillaje",
+      "brand": "M·A·C",
+      "size": "Tono NC25 · Contenido por confirmar",
+      "current_price_mxn": 600,
+      "current_quantity": null,
+      "approved": false,
+      "preview_image": "assets/products/mac.png",
+      "posted_price_mxn": 600
+    },
+    {
+      "source_url": "https://www.instagram.com/p/DPPEyagAWmG/",
+      "status": "researched_draft_in_store_preview",
+      "name": "pH Balancing Gel Cleanser · Limpiador facial",
+      "brand": "PHYLA",
+      "size": "120 ml",
+      "current_price_mxn": 500,
+      "current_quantity": null,
+      "approved": false,
+      "preview_image": "assets/products/phyla.jpg",
+      "posted_price_mxn": null
+    },
+    {
+      "source_url": "https://www.instagram.com/p/DPOzIHHEW-V/",
+      "status": "researched_draft_in_store_preview",
+      "name": "Lip Maestro Satin · Labial líquido",
+      "brand": "ARMANI",
+      "size": "Tono y presentación por confirmar",
+      "current_price_mxn": 600,
+      "current_quantity": null,
+      "approved": false,
+      "preview_image": "assets/products/armani.jpg",
+      "posted_price_mxn": 600
+    },
+    {
+      "source_url": "https://www.instagram.com/p/DPOy2pSkdMR/",
+      "status": "removed_by_owner_2026-10-28",
+      "name": "Solar Glow · Polvo fijador traslúcido",
+      "brand": "DOLCE & GABBANA",
+      "size": "10 g",
+      "current_price_mxn": null,
+      "current_quantity": null,
+      "approved": false,
+      "preview_image": "assets/instagram/DPOy2pSkdMR.jpg",
+      "posted_price_mxn": null
+    }
+  ]
+}

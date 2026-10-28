@@ -1,0 +1,57 @@
+{
+  "researched_on": "2026-10-28",
+  "scope": "Five private preview drafts; original bilingual copy informed by brand pages. No production publication.",
+  "prices_mxn": {
+    "innbeauty": 800,
+    "tatcha": 1200,
+    "mac": 600,
+    "phyla": 500,
+    "armani": 600
+  },
+  "pricing_note": "Owner supplied Tatcha 1200 and Phyla 500 and removed D&G on 2026-10-28; prior 800/600/600 prices retained. Quantities remain unconfirmed.",
+  "products": [
+    {
+      "id": "DPzHBIqgRzn",
+      "description_source": "https://www.innbeautyproject.com/products/calm-the-red-down",
+      "image_source": "https://www.sephora.com/productimages/sku/s2828622-main-zoom.jpg?imwidth=1000",
+      "asset": "tienda/assets/products/innbeauty.jpg",
+      "checks": "50 ml; plain white background without certification badges. Copy describes hydration, barrier support and the appearance of redness, without disease-treatment or clinical percentage claims."
+    },
+    {
+      "id": "DPzC1FRj1AL",
+      "description_source": "https://tatcha.com/products/the-water-cream-lightweight-moisturizer",
+      "image_source": "https://www.spacenk.com/dw/image/v2/ABCE_PRD/on/demandware.static/-/Sites-spacenkmastercatalog/default/dw120890c9/products/TATCHA/UK200034624_TATCHA.jpg?sh=1000&sw=1000",
+      "asset": "tienda/assets/products/tatcha-water-cream.jpg",
+      "checks": "Older packaging selected rather than substituting the newly reformulated refillable jar. Size remains unconfirmed; reference image shows 50 ml. Copy uses general oil-free hydration and texture benefits, not the new formula ingredient or clinical claims."
+    },
+    {
+      "id": "DPPFRqxARKB",
+      "description_source": "https://www.maccosmetics.com/products/studio-fix-fluid-spf-15-24hr-matte-foundation-oil-control",
+      "image_source": "https://www.maccosmetics.com/cdn/shop/files/mac_sku_SRMX03_US_3000x3000_0S.png?v=1793043029&width=1200",
+      "asset": "tienda/assets/products/mac.png",
+      "checks": "Transparent PNG. Product structured data identifies SRMX03 as NC25, matching Gaby's post; not the default NW30 image."
+    },
+    {
+      "id": "DPPEyagAWmG",
+      "description_source": "https://phyla.com/products/ph-balancing-gel-cleanser",
+      "image_source": "https://shop.advancedderm.com/cdn/shop/files/Phyla_CLEANSER_d9c6502a-c0f3-4660-ac5e-f1e96dee7e53.jpg?v=1771976850&width=1000",
+      "asset": "tienda/assets/products/phyla.jpg",
+      "checks": "Matching 120 ml pump bottle selected instead of current 250 ml packaging; no implication that the three bottles pictured in the original post represent current stock. General gentle cleansing benefits; no acne-treatment claim."
+    },
+    {
+      "id": "DPOzIHHEW-V",
+      "description_source": "https://www.giorgioarmanibeauty.com.au/makeup/lips/lipstick/lip-maestro-satin-lipstick/ww-00716-arm.html",
+      "image_source": "https://www.instagram.com/p/DPOzIHHEW-V/",
+      "asset": "tienda/assets/products/armani.jpg",
+      "checks": "Retained matching white-background image from Gaby's post. Frosted tube and diamond applicator match Lip Maestro Satin, rather than Lip Maestro Velvet. Shade and size unconfirmed. Higher-resolution online images in other shades/formulas were not substituted."
+    }
+  ],
+  "removed": [
+    {
+      "id": "DPOy2pSkdMR",
+      "name": "Dolce & Gabbana Solar Glow",
+      "reason": "Owner requested removal on 2026-10-28"
+    }
+  ],
+  "asset_note": "Publicly accessible reference product photography sourced for the staged preview. Source URLs are internal provenance; no Instagram links are rendered in the shop. Brand image usage permission has not been established for production."
+}
