@@ -1,0 +1,124 @@
+name: Publish to Namecheap
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Check connection or publish website
+        required: true
+        default: check
+        type: choice
+        options:
+          - check
+          - deploy
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: namecheap-production
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || vars.NAMECHEAP_AUTO_DEPLOY == 'true')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      DEPLOY: ${{ github.event_name == 'push' || inputs.mode == 'deploy' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Prepare production website
+        if: env.DEPLOY == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 prepare_launch.py https://gabypadillamakeup.com
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, shutil
+          pages = ['index.html', 'novias/index.html', 'xv-anos/index.html',
+                   'en/index.html', 'en/bridal/index.html', 'en/quinceanera/index.html']
+          for name in pages:
+              p = Path(name)
+              text = re.sub(r'<meta\b[^>]*name=["\x27]robots["\x27][^>]*>', '<meta name="robots" content="index, follow">', p.read_text(), flags=re.I)
+              assert 'noindex' not in text.lower(), name
+              assert 'https://gabypadillamakeup.com/' in text, name
+              p.write_text(text)
+          out = Path('_publish')
+          out.mkdir()
+          for name in ['assets', 'en', 'novias', 'xv-anos']:
+              shutil.copytree(name, out / name)
+          for name in ['index.html', 'styles.css', 'script.js', 'usd-pricing.json', 'robots.txt', 'sitemap.xml']:
+              shutil.copy2(name, out / name)
+          PY
+
+      - name: Load deployment key
+        shell: bash
+        env:
+          PRIVATE_KEY: ${{ secrets.NAMECHEAP_SSH_PRIVATE_KEY }}
+          KEY_PASSPHRASE: ${{ secrets.NAMECHEAP_SSH_PASSPHRASE }}
+          KNOWN_HOSTS: ${{ secrets.NAMECHEAP_SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          test -n "$PRIVATE_KEY" || { echo "::error::Missing NAMECHEAP_SSH_PRIVATE_KEY"; exit 1; }
+          test -n "$KEY_PASSPHRASE" || { echo "::error::Missing NAMECHEAP_SSH_PASSPHRASE"; exit 1; }
+          test -n "$KNOWN_HOSTS" || { echo "::error::Missing NAMECHEAP_SSH_KNOWN_HOSTS"; exit 1; }
+          umask 077
+          mkdir -p ~/.ssh
+          printf '%s\n' "$PRIVATE_KEY" > ~/.ssh/namecheap_deploy
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+          printf '#!/bin/sh\nprintf "%%s\\n" "$KEY_PASSPHRASE"\n' > "$RUNNER_TEMP/namecheap-askpass"
+          chmod 700 "$RUNNER_TEMP/namecheap-askpass"
+          eval "$(ssh-agent -s)"
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> "$GITHUB_ENV"
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> "$GITHUB_ENV"
+          DISPLAY=:0 SSH_ASKPASS="$RUNNER_TEMP/namecheap-askpass" SSH_ASKPASS_REQUIRE=force ssh-add ~/.ssh/namecheap_deploy < /dev/null
+          rm -f ~/.ssh/namecheap_deploy "$RUNNER_TEMP/namecheap-askpass"
+          cat > ~/.ssh/config <<'SSH'
+          Host namecheap
+            HostName 66.29.137.198
+            User gabyinvp
+            Port 21098
+            BatchMode yes
+            StrictHostKeyChecking yes
+            ConnectTimeout 20
+          SSH
+
+      - name: Check access and destination
+        run: |
+          ssh namecheap 'set -eu; test "$(id -un)" = gabyinvp; test -d /home/gabyinvp/public_html; test -w /home/gabyinvp/public_html; command -v rsync; command -v tar; echo "Connection and destination verified."'
+
+      - name: Back up current website
+        if: env.DEPLOY == 'true'
+        run: |
+          ssh namecheap 'set -eu; umask 077; mkdir -p /home/gabyinvp/deployment-backups; tar -czf /home/gabyinvp/deployment-backups/site-${{ github.run_id }}-${{ github.run_attempt }}.tar.gz -C /home/gabyinvp/public_html .'
+
+      - name: Upload website
+        if: env.DEPLOY == 'true'
+        run: |
+          rsync -rlptz --delay-updates --chmod=D755,F644 _publish/ namecheap:/home/gabyinvp/public_html/
+
+      - name: Check public pages
+        if: env.DEPLOY == 'true'
+        run: |
+          for page in "" novias/ xv-anos/ en/ en/bridal/ en/quinceanera/; do
+            curl --fail --silent --show-error --location --max-redirs 5 --max-time 30 "https://gabypadillamakeup.com/$page" > "$RUNNER_TEMP/live-page.html"
+            grep -q 'https://gabypadillamakeup.com/' "$RUNNER_TEMP/live-page.html"
+            if grep -qi noindex "$RUNNER_TEMP/live-page.html"; then
+              echo "::error::Live page still contains noindex: $page"
+              exit 1
+            fi
+          done
+
+      - name: Clean up credentials
+        if: always()
+        shell: bash
+        run: |
+          rm -f ~/.ssh/namecheap_deploy "$RUNNER_TEMP/namecheap-askpass"
+          if [ -n "${SSH_AGENT_PID:-}" ]; then ssh-agent -k; fi
