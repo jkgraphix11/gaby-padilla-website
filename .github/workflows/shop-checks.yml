@@ -1,0 +1,26 @@
+name: Check shop preview
+on:
+  pull_request:
+    paths:
+      - 'tienda/**'
+      - 'shop-service/**'
+      - '.github/workflows/shop-checks.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Install image validation dependency
+        run: python3 -m pip install -r shop-service/requirements.txt
+      - name: Verify inventory, approval and access controls
+        run: python3 -B -m unittest discover -s shop-service -p 'test_*.py'
+      - name: Check shop scripts
+        run: |
+          node --check tienda/shop.js
+          node --check tienda/manage.js
