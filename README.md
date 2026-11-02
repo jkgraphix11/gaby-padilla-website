@@ -31,3 +31,16 @@ This repository contains the website and WhatsApp shop preview. GitHub Pages ser
 Remove `noindex`, use a production domain in `prepare_launch.py`, and validate canonicals/hreflang/sitemap; then migrate the photos and copy to the production host.
 
 GitHub Pages does not enforce password protection for a public staging website. For access-controlled previews, choose a host with authentication instead.
+
+## Responsive images
+
+Original photos stay in `assets/images/` for full-size gallery viewing. Responsive
+WebP copies use `-responsive-WIDTH.webp` names and are referenced by the page
+`srcset` attributes. With Pillow installed, regenerate these copies with
+`python scripts/optimize_images.py`. The script reads originals, preserves alpha
+transparency, verifies each encoded image, and prints the output dimensions and
+byte sizes. Keep each `srcset` width descriptor equal to the file's actual width.
+
+The production workflow runs `prepare_launch.py` and changes the six service
+pages from staging `noindex` to `index, follow` in its build. Keep that staging
+protection in source; review branches must not trigger a production deployment.

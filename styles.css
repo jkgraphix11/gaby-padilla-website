@@ -300,3 +300,22 @@ html.lightbox-open,body.lightbox-open{overflow:hidden;overscroll-behavior:none}
 @media (max-width:380px) {
   .feature-copy h3 { font-size:40px; }
 }
+
+/* Search-focused copy retains the editorial typography and wraps at every width. */
+.hero h1.seo-heading{font-size:clamp(42px,4.5vw,68px);line-height:1.06;white-space:normal;text-wrap:balance;margin-bottom:18px}
+.hero-tagline{font:400 23px/1.35 var(--serif);color:var(--cocoa);margin:0 0 18px}
+.hero-copy,.hero-copy-inner{min-width:0}
+.footer-link-block{min-width:0;line-height:1.6}
+.contact-phone{font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Readable warm accents on cream, linen, and pale-pink section backgrounds. */
+.hero h1 em,.section-heading h2 em,.portfolio-header h2 em,.about-content h2 em,.faq-intro h2 em,.detail-inclusion-heading h2 em{color:#82665c}
+.hero-bottom,.footer-bottom,.detail-hero-trust,.detail-num,.detail-step>span,.footer-link-block>span:first-child{color:#746056}
+.hero-image-caption,.hero-index,.detail-hero-image-label{background:rgba(21,19,18,.72);padding:6px 9px}
+@media(max-width:600px){
+  .hero h1.seo-heading{font-size:clamp(40px,10.8vw,52px);line-height:1.08}
+  .hero-tagline{font-size:22px}
+  .detail-hero-actions .btn,.detail-price-card .btn,.closing .btn{max-width:100%;white-space:normal;text-align:left;line-height:1.5}
+}
+@media(max-width:380px){
+  .header-inner{gap:8px}
+}
