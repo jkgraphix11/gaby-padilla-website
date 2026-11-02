@@ -210,7 +210,11 @@ function layoutJustifiedGallery(gallery) {
     row.className = 'justified-row';
     row.style.setProperty('--justified-gap', `${gap}px`);
     for (let index = start; index < end; index++) {
-      figures[index].style.setProperty('--tile-width', `${height * ratios[index]}px`);
+      const tileWidth = height * ratios[index];
+      figures[index].style.setProperty('--tile-width', `${tileWidth}px`);
+      // The row algorithm can produce one, two, or three photos on mobile.
+      // Keep responsive image selection aligned with the actual rendered width.
+      figures[index].querySelector('img').sizes = `${Math.ceil(tileWidth)}px`;
       row.append(figures[index]);
     }
     fragment.append(row);

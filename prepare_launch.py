@@ -22,6 +22,7 @@ urls={pair:{lang:domain+'/'+rel[0] for lang,rel in langs.items()} for pair,langs
 for group, langs in pairs.items():
  for locale,(_,name) in langs.items():
   file=site/name;txt=file.read_text(encoding='utf-8')
+  txt=txt.replace('https://jkgraphix11.github.io/gaby-padilla-website/',domain+'/')
   txt=re.sub(r'<link[^>]*rel=["\'](?:canonical|alternate)["\'][^>]*>', '',txt)
   txt=re.sub(r'<meta[^>]*(?:property=["\']og:url["\']|property=["\']og:image["\']|name=["\']twitter:image["\'])[^>]*>', '',txt)
   preferred_image=portrait if group=='home' else domain+'/assets/images/gaby-padilla-social-share.jpg'
@@ -30,7 +31,7 @@ for group, langs in pairs.items():
   if group=='home':
    match=re.search(r'(<script[^>]*id="local-business-schema"[^>]*>)(.*?)(</script>)',txt,flags=re.DOTALL)
    if not match:raise SystemExit('Missing business schema '+name)
-   item=json.loads(match.group(2));item.update({'@id':domain+'/#business','url':domain+'/','logo':domain+'/assets/images/gaby-padilla-logo.png','image':portrait})
+   item=json.loads(match.group(2));item.update({'@id':domain+'/#business','url':domain+'/','logo':domain+'/assets/images/gaby-padilla-logo-responsive-720.webp','image':portrait})
   else:
    match=re.search(r'(<script[^>]*id="service-schema"[^>]*>)(.*?)(</script>)',txt,flags=re.DOTALL)
    if not match:raise SystemExit('Missing service schema '+name)
