@@ -46,7 +46,7 @@ jobs:
                    'en/index.html', 'en/bridal/index.html', 'en/quinceanera/index.html']
           for name in pages:
               p = Path(name)
-              text = re.sub(r'<meta\b[^>]*name=["\x27]robots["\x27][^>]*>', '<meta name="robots" content="index, follow">', p.read_text(), flags=re.I)
+              text = re.sub(r'<meta\b[^>]*name=["\x27]robots["\x27][^>]*>', '<meta name="robots" content="index, follow, max-image-preview:large">', p.read_text(), flags=re.I)
               assert 'noindex' not in text.lower(), name
               assert 'https://gabypadillamakeup.com/' in text, name
               p.write_text(text)
@@ -58,6 +58,7 @@ jobs:
               shutil.copy2(name, out / name)
           PY
           python3 shop-service/prepare_storefront.py . _publish
+          python3 scripts/verify_seo.py --directory _publish
 
       - name: Load deployment key
         shell: bash
@@ -108,20 +109,7 @@ jobs:
       - name: Check public pages
         if: env.DEPLOY == 'true'
         run: |
-          for page in "" novias/ xv-anos/ en/ en/bridal/ en/quinceanera/ tienda/; do
-            curl --fail --silent --show-error --location --max-redirs 5 --max-time 30 \
-              --dump-header "$RUNNER_TEMP/live-headers.txt" \
-              "https://gabypadillamakeup.com/$page" > "$RUNNER_TEMP/live-page.html"
-            grep -q 'https://gabypadillamakeup.com/' "$RUNNER_TEMP/live-page.html"
-            if grep -qi noindex "$RUNNER_TEMP/live-page.html" || grep -Eiq '^x-robots-tag:.*noindex' "$RUNNER_TEMP/live-headers.txt"; then
-              echo "::error::Live page blocks indexing: $page"
-              exit 1
-            fi
-            if [ "$page" != "tienda/" ] && ! grep -Eiq '<meta[^>]*name=["\x27]robots["\x27][^>]*content=["\x27]index, follow["\x27]' "$RUNNER_TEMP/live-page.html"; then
-              echo "::error::Production index, follow meta tag missing: $page"
-              exit 1
-            fi
-          done
+          python3 scripts/verify_seo.py
 
       - name: Clean up credentials
         if: always()

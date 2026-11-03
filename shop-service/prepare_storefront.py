@@ -28,7 +28,7 @@ def export_storefront(root,output):
         dest=target/name;dest.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(source/name,dest)
     html=(source/'index.html').read_text()
     html=html.replace('<head>','<head><meta name="shop-preview" content="disabled"><link rel="canonical" href="https://gabypadillamakeup.com/tienda/">',1)
-    html=re.sub(r'content="noindex,nofollow,noarchive"','content="index,follow"',html)
+    html=re.sub(r'content="noindex,nofollow,noarchive"','content="index,follow,max-image-preview:large"',html)
     # Public pages never contain the management/demo toolbar.
     html=re.sub(r'<div class="preview-bar" id="preview-bar".*?</div>','',html,flags=re.S)
     (target/'index.html').write_text(html)
