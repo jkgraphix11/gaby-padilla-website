@@ -109,10 +109,16 @@ jobs:
         if: env.DEPLOY == 'true'
         run: |
           for page in "" novias/ xv-anos/ en/ en/bridal/ en/quinceanera/ tienda/; do
-            curl --fail --silent --show-error --location --max-redirs 5 --max-time 30 "https://gabypadillamakeup.com/$page" > "$RUNNER_TEMP/live-page.html"
+            curl --fail --silent --show-error --location --max-redirs 5 --max-time 30 \
+              --dump-header "$RUNNER_TEMP/live-headers.txt" \
+              "https://gabypadillamakeup.com/$page" > "$RUNNER_TEMP/live-page.html"
             grep -q 'https://gabypadillamakeup.com/' "$RUNNER_TEMP/live-page.html"
-            if grep -qi noindex "$RUNNER_TEMP/live-page.html"; then
-              echo "::error::Live page still contains noindex: $page"
+            if grep -qi noindex "$RUNNER_TEMP/live-page.html" || grep -Eiq '^x-robots-tag:.*noindex' "$RUNNER_TEMP/live-headers.txt"; then
+              echo "::error::Live page blocks indexing: $page"
+              exit 1
+            fi
+            if [ "$page" != "tienda/" ] && ! grep -Eiq '<meta[^>]*name=["\x27]robots["\x27][^>]*content=["\x27]index, follow["\x27]' "$RUNNER_TEMP/live-page.html"; then
+              echo "::error::Production index, follow meta tag missing: $page"
               exit 1
             fi
           done
