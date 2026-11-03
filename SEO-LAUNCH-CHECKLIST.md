@@ -1,5 +1,16 @@
 # Gaby Padilla — local SEO launch checklist (V3)
 
+## Production measurement — November 2, 2026
+
+- GA4 web stream: `G-6SEBFKV22M` (Gaby Padilla Website), canonical host `gabypadillamakeup.com`.
+- `scripts/prepare_analytics.py` adds `/analytics.js` once per production page. GitHub previews and local copies do not send analytics.
+- Automatic measurement: page views and scrolling. Custom events: `booking_click`, `whatsapp_click`, `phone_click`. These measure contact intent, not completed reservations, payments or purchases.
+- Automatic outbound-link, form, site-search, video and download measurement are disabled. Custom events contain only category labels, placement and language, not WhatsApp message/order text or customer contact details. URL query data is restricted to short campaign attribution fields; referral URLs are reduced to the origin.
+- Google Signals and advertising personalization are disabled. The bilingual notice at `/privacidad/` offers a browser-local opt-out; GPC and Do Not Track are also honored. This informational page is intentionally excluded from the marketing sitemap and has `noindex, follow`.
+- Run `node --test scripts/analytics.test.cjs`; production checks also verify one tracker and a privacy link on every marketing/shop page. For a temporary DebugView session, add `?analytics_debug=1` to a public page; this flag is not included in the reported page URL.
+- Search Console: all six SEO pages and the shop were individually confirmed indexed; canonical selection matched. Sitemap resubmitted successfully (7 discovered pages), no manual actions/security issues, homepage live crawl passed and recrawl requested.
+- No public storefront address is published. A Google Business Profile is not a prerequisite for website indexing.
+
 ## Built into the site
 - Separate, **server-rendered** Spanish (`/`) and English (`/en/`) HTML pages. The language switch follows direct links; all content is legible to crawlers with JavaScript disabled.
 - Specific localized `<title>` tags, unique meta descriptions, OG/Twitter sharing metadata, large 1200 × 630 share image from Gaby's original photography.

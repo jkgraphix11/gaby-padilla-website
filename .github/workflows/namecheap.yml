@@ -58,6 +58,9 @@ jobs:
               shutil.copy2(name, out / name)
           PY
           python3 shop-service/prepare_storefront.py . _publish
+          node --check analytics.js
+          node --test scripts/analytics.test.cjs
+          python3 scripts/prepare_analytics.py _publish
           python3 scripts/verify_seo.py --directory _publish
 
       - name: Load deployment key

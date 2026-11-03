@@ -88,6 +88,8 @@ def main():
     for path in PATHS:
         html, headers = responses[path]
         page = Page(html)
+        assert html.count('data-site-analytics') == 1, (path, 'analytics missing or duplicated')
+        assert 'href="/privacidad/"' in html, (path, 'privacy notice link missing')
         rules = [item.get('content', '').lower() for item in page.meta
                  if item.get('name', '').lower() in ('robots', 'googlebot', 'bingbot', 'oai-searchbot')]
         rules.append(headers.lower())
