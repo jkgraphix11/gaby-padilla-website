@@ -54,7 +54,7 @@ jobs:
           out.mkdir()
           for name in ['assets', 'en', 'novias', 'xv-anos']:
               shutil.copytree(name, out / name)
-          for name in ['index.html', 'styles.css', 'script.js', 'usd-pricing.json', 'robots.txt', 'sitemap.xml']:
+          for name in ['index.html', 'styles.css', 'script.js', 'usd-pricing.json', 'robots.txt', 'sitemap.xml', 'llms.txt']:
               shutil.copy2(name, out / name)
           PY
           python3 shop-service/prepare_storefront.py . _publish
