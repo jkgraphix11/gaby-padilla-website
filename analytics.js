@@ -60,10 +60,26 @@
     allow_ad_personalization_signals: false,
     ...(query.get('analytics_debug') === '1' ? { debug_mode: true } : {})
   });
-  const tag = document.createElement('script');
-  tag.async = true;
-  tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
-  document.head.appendChild(tag);
+  // Load the Google tag after the page is usable: first interaction, or idle time after load.
+  // Commands queue in dataLayer until then, so no page view or click is lost.
+  let tagLoaded = false;
+  const loadTag = () => {
+    if (tagLoaded) return;
+    tagLoaded = true;
+    const tag = document.createElement('script');
+    tag.async = true;
+    tag.src = 'https://www.googletagmanager.com/gtag/js?id=' + measurementId;
+    document.head.appendChild(tag);
+  };
+  if (typeof window.addEventListener !== 'function') {
+    loadTag();
+  } else {
+    for (const type of ['pointerdown', 'keydown', 'scroll', 'touchstart']) {
+      window.addEventListener(type, loadTag, { once: true, passive: true, capture: true });
+    }
+    const whenIdle = () => (window.requestIdleCallback ? window.requestIdleCallback(loadTag, { timeout: 3000 }) : setTimeout(loadTag, 2000));
+    if (document.readyState === 'complete') whenIdle(); else window.addEventListener('load', whenIdle, { once: true });
+  }
 
   document.addEventListener('click', event => {
     if (window['ga-disable-' + measurementId]) return;
