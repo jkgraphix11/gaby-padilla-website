@@ -5,10 +5,14 @@ const BOOKING_URLS = {
   bridal: 'https://gabypadillamakeupartist.site.agendapro.com/mx/sucursal/578261', // No verified direct service deep link; opens the full listing.
   xv: 'https://gabypadillamakeupartist.site.agendapro.com/mx/sucursal/578261'      // No verified direct service deep link; opens the full listing.
 };
-document.querySelectorAll('[data-booking]').forEach(a => {
-  const type = a.getAttribute('data-booking') || 'general';
-  a.href = BOOKING_URLS[type] || BOOKING_URLS.general;
-});
+// English pages use fixed USD prices and direct WhatsApp appointment inquiries.
+// Keep their service-specific hrefs intact; only Spanish pages use AgendaPro.
+if (!document.documentElement.lang.toLowerCase().startsWith('en')) {
+  document.querySelectorAll('[data-booking]').forEach(a => {
+    const type = a.getAttribute('data-booking') || 'general';
+    a.href = BOOKING_URLS[type] || BOOKING_URLS.general;
+  });
+}
 const toggle = document.getElementById('menu-toggle');
 const menu = document.getElementById('mobile-menu');
 const menuClose = document.getElementById('menu-close');
